@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Hub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('main2.1.jpg') ;
+            background-position: center;
+            background-repeat: repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: #121212;
+            color: yellow ;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            transition: 0.3s ease-in-out;
+        }
+        .navbar a {
+            color: white !important;
+        }
+
+        .section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .text-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .text-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .fade-down {
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #f39c12;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .back-to-top:hover {
+            background-color: #e67e22;
+        }
+
+        .mange {
+            gap: 20px;
+        }
+
+        .pic {
+            border-radius: 20px 5px 20px 5px;
+            margin-bottom: 1rem;
+        }
+
+        span {
+            color: goldenrod;
+            transition: 1s ease-in;
+        }
+
+        span:hover {
+            color: rgb(194, 224, 24);
+        }
+        #contact{
+            background-color: hsl(163, 1%, 25%);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><span>Fashion</span> Hub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#new-arrivals">New Arrivals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#trending">Trending</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#cart">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h1 class="fade-down">About Fashion Hub</h1>
+        <p class="fade-down">Fashion Hub is your ultimate destination for the latest fashion trends. Our mission is to provide stylish, high-quality apparel that keeps you ahead in the fashion game.</p>
+    </section>
+
+    <!-- New Arrivals Section -->
+    <section id="new-arrivals" class="section">
+        <h1 class="text-animate">New Arrivals</h1>
+        <p class="text-animate">Explore our latest collection with fresh styles, modern trends, and the hottest designs.</p>
+        <div class="container mange">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="1.jpg" class="img-fluid pic" alt="New Arrival 1">
+                </div>
+                <div class="col-md-4">
+                    <img src="2.jpg" class="img-fluid pic" alt="New Arrival 2">
+                </div>
+                <div class="col-md-4">
+                    <img src="3.jpg" class="img-fluid pic" alt="New Arrival 3">
+                </div>
+                <div class="col-md-4">
+                    <img src="4.jpg" class="img-fluid pic" alt="New Arrival 4">
+                </div> 
+                <div class="col-md-4">
+                    <img src="5.jpg" class="img-fluid pic" alt="New Arrival 5">
+                </div>
+                <div class="col-md-4">
+                    <img src="6.jpg" class="img-fluid pic" alt="New Arrival 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section py-5">
+        <div class="container">
+            <h1 class="text-center mb-4 text-animate">Contact Us</h1>
+            <p class="text-center mb-5 text-animate">Have any questions? Reach out to us and we'll be happy to assist you!</p>
+
+            <!-- Contact Form -->
+            <form id="contactForm" action="mailto:support@fashionhub.com" method="post" enctype="text/plain" onsubmit="handleFormSubmission(event)">
+                <div class="row">
+                    <!-- Name Input -->
+                    <div class="col-md-6 mb-3">
+                        <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="col-md-6 mb-3">
+                        <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                </div>
+
+                <!-- Message Input -->
+                <div class="mb-3">
+                    <textarea id="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                </div>
+            </form>
+
+            <!-- Contact Information -->
+            <div class="mt-4 text-center">
+                <p class="text-animate">Email: <a href="mailto:support@fashionhub.com">support@fashionhub.com</a></p>
+                <p class="text-animate">Phone: +1 (800) 123-4567</p>
+                <p class="text-animate">Address: 359, M.I.E PART A, BAHADURGARH, HARYANA</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-danger back-to-top">↑ Back to Top</button>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const textElements = document.querySelectorAll('.text-animate, .fade-down');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        const textObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('text-visible', 'fade-visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        textElements.forEach(text => {
+            textObserver.observe(text);
+        });
+
+        const backToTopBtn = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Handle form submission
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            // Form submission logic or redirect
+            alert("Thank you for reaching out! Your message has been sent.");
+            window.location.href = "thank-you.html"; // Redirect to a thank-you page
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Hub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        /* Color Palette (From Image) */
+        :root {
+            --primary-color: #A5693F;
+            /* Wild Face main color */
+            --secondary-color: #D5B8A0;
+            /* Light tan/beige */
+            --accent-color: #e8c5a3;
+            /* Lightest color */
+            --text-color: #4A3323;
+            /* Dark brown text color */
+            --background-color: #F2E8E1;
+            /* Very light background */
+            --dark-background: #121212;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: url(main2.1.jpg);
+           background-position: center;
+           background-repeat: no-repeat;
+           background-attachment: fixed;
+           background-size: cover;
+            /* Light Background */
+            color: var(--text-color);
+            /* Dark Brown */
+            font-family: 'Arial', sans-serif;
+            /* A clean, readable font - or use a font link similar to that in the image */
+            text-align: center;
+            scroll-behavior: smooth;
+            /* For smooth scrolling on internal links */
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            /* Dark translucent background */
+            backdrop-filter: blur(10px);
+            transition: 0.3s ease-in-out;
+        }
+
+        .navbar a {
+            color: var(--secondary-color) !important;
+            /* Light Tan */
+            transition: color 0.3s ease;
+            font-weight: bold;
+            /* Making the nav a bit bolder */
+        }
+
+        .navbar a:hover {
+            color: var(--primary-color) !important;
+            /* Main brown color on hover */
+        }
+
+        /*Styling of nav bar title*/
+        .navbar-brand {
+            font-size: 1.75rem;
+            font-weight: bold;
+        }
+
+        .section {
+            min-height: 100vh;
+            /* Changed height to min-height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .text-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .text-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .fade-down {
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            /* Light tan on hover */
+            color: var(--text-color);
+            /* Dark text on hover */
+        }
+
+        .mange {
+            gap: 20px;
+        }
+
+        .pic {
+            border-radius: 20px 5px 20px 5px;
+            margin-bottom: 1rem;
+        }
+
+        span {
+            color: var(--secondary-color);
+            transition: 1s ease-in;
+        }
+
+        span:hover {
+            color: var(--primary-color);
+        }
+
+        #contact {
+            background-color: var(--secondary-color);
+        }
+
+        /* Social Icon Styling (in footer) */
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: var(--secondary-color);
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+            text-decoration: none;
+            /* Remove underlines from links */
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            /* Hover color for social icons */
+        }
+
+        /* About Section Styling */
+        #about .container {
+            display: flex;
+            flex-direction: row;
+            /* Arrange content side by side */
+            align-items: center;
+            /* Vertically align items */
+            justify-content: space-around;
+            /* Distribute space evenly */
+        }
+
+        #about .carousel {
+            width: 45%;
+            /* Take up about half the container width */
+            max-width: 500px;
+            /* Maximum width for the carousel */
+        }
+
+        #about .carousel img {
+            height: 300px;
+            /* Fixed height for the images */
+            object-fit: cover;
+            /* Maintain aspect ratio while filling the area */
+            border-radius: 15px;
+            /* Rounded corners for the images */
+        }
+
+        #about .about-content {
+            width: 45%;
+            /* Take up about half the container width */
+            text-align: left;
+            /* Align content to the left within this section */
+        }
+
+        /* Adjust carousel controls style */
+        #about .carousel-control-prev,
+        #about .carousel-control-next {
+            width: 5%;
+            /* Adjust control width if necessary */
+        }
+
+        @media (max-width: 768px) {
+
+            /* Stack content vertically on smaller screens */
+            #about .container {
+                flex-direction: column;
+            }
+
+            #about .carousel,
+            #about .about-content {
+                width: 100%;
+                /* Take full width on smaller screens */
+                margin-bottom: 20px;
+                /* Add some spacing */
+            }
+
+            #about .carousel img {
+                height: 250px;
+                /* Adjust image height for smaller screens */
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Styling Contact form */
+        #contactForm .form-control {
+            background-color: var(--background-color);
+            border-color: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        #contactForm .form-control::placeholder {
+            color: var(--primary-color);
+        }
+
+        #contactForm .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        #contactForm .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        /* Dropdown Styling */
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0; 
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: var(--background-color);
+            /* Change dropdown background to light */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border: none;
+            padding: 0;
+            /* Remove default padding */
+            transition: all 0.3s ease; /* Add a transition for smooth appearance */
+        }
+
+        .dropdown-item {
+            color: var(--text-color);
+            /* Set dropdown item text to dark brown */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+         .dropdown-item:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+         } 
+
+        .dropdown-item:not(:last-child) {
+            border-bottom: 1px solid var(--primary-color);
+            /* Add a subtle separator */
+        } 
+
+        /* FEATURED SECTION STYLING */
+        #featured {
+            text-align: left;
+            /* Align the section content to the left */
+        }
+
+        #featured .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+             #featured .product-grid {
+             grid-template-columns: 1fr; /*One column*/
+            }
+         }
+
+        #featured .product-card {
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+             min-height: 380px;  /*Setting a default minimum height*/
+        }
+
+        #featured .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #featured .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            /* Maintain aspect ratio */
+        }
+
+        #featured .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        #featured .product-title {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+
+        #featured .product-price {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        #featured .add-to-cart-btn {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #featured .add-to-cart-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        /* CART SECTION STYLING */
+        #cart {
+            text-align: left;
+            /* Align the section content to the left */
+        }
+
+        #cart .cart-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cart .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        #cart .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        #cart .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        #cart .cart-item-info {
+            flex-grow: 1;
+            margin-left: 15px;
+        }
+
+        #cart .cart-item-name {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        #cart .cart-item-price {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        #cart .remove-item-btn {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #cart .remove-item-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        #cart .cart-total {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            padding: 10px 0;
+            text-align: right;
+        }
+
+        #cart .checkout-btn {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: block;
+            /* Make it a full-width button */
+            width: 100%;
+            margin-top: 10px;
+            /* Add some space above the button */
+            text-align: center;
+            /* Ensure the text is centered */
+        }
+
+        #cart .checkout-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        /* Styling the Nav Bar*/
+        .navbar-nav .dropdown .dropdown-menu {
+            position: absolute;
+        }
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+       
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#"><span>Fashion</span> Hub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+
+                <!-- New Arrivals Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownNewArrivals" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        New Arrivals
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownNewArrivals">
+                        <li><a class="dropdown-item" href="#">Women's</a></li>
+                        <li><a class="dropdown-item" href="#">Men's</a></li>
+                        <li><a class="dropdown-item" href="#">Kids</a></li>
+                        <li><a class="dropdown-item" href="#">Accessories</a></li>
+                    </ul>
+                </li>
+
+                <!-- Trending Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTrending" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Trending
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownTrending">
+                        <li><a class="dropdown-item" href="#">Most Popular</a></li>
+                        <li><a class="dropdown-item" href="#">Latest Trends</a></li>
+                        <li><a class="dropdown-item" href="#">Best Sellers</a></li>
+                    </ul>
+                </li>
+
+                <!-- Featured Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFeatured" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Featured
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownFeatured">
+                        <li><a class="dropdown-item" href="#">Special Offers</a></li>
+                        <li><a class="dropdown-item" href="#">Limited Edition</a></li>
+                        <li><a class="dropdown-item" href="#">Seasonal Picks</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+                <li class="nav-item"><a class="nav-link" href="#cart">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- About Section -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="about-content">
+            <h1 class="fade-down">About Fashion Hub</h1>
+            <p class="fade-down">Fashion Hub is your ultimate destination for the latest fashion trends. Our mission is to
+                provide stylish, high-quality apparel that keeps you ahead in the fashion game.</p>
+        </div>
+
+        <!-- About Section Image Carousel -->
+        <div id="aboutCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="about1.jpg" class="d-block w-100" alt="About Fashion 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="about2.jpg" class="d-block w-100" alt="About Fashion 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="about3.jpg" class="d-block w-100" alt="About Fashion 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="1.jpg" class="d-block w-100" alt="About Fashion 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="2.jpg" class="d-block w-100" alt="About Fashion 5">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED SECTION -->
+<section id="featured" class="section">
+    <h1 class="text-animate">Featured Products</h1>
+    <p class="text-animate">Check out our hand-picked selection of the season's best!</p>
+
+    <div class="product-grid">
+        <!-- Sample Products (replace with your actual products) -->
+        <div class="product-card">
+            <img src="featured1.jpg" alt="Featured Product 1" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Elegant Summer Dress</h3>
+                <p class="product-price">$79.99</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Elegant Summer Dress', 79.99, 'featured1.jpg')">Add to
+                    Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="featured2.jpg" alt="Featured Product 2" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Casual Denim Jeans</h3>
+                <p class="product-price">$59.99</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Casual Denim Jeans', 59.99, 'featured2.jpg')">Add to
+                    Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="featured3.jpg" alt="Featured Product 3" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Stylish Leather Jacket</h3>
+                <p class="product-price">$129.99</p>
+                <button class="add-to-cart-btn"
+                        onclick="addToCart('Stylish Leather Jacket', 129.99, 'featured3.jpg')">Add to Cart
+                </button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="about1.jpg" alt="Featured Product 4" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Casual Dress</h3>
+                <p class="product-price">$60.00</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Casual Dress', 60.00, 'about1.jpg')">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="about2.jpg" alt="Featured Product 5" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Night Suit</h3>
+                <p class="product-price">$40.00</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Night Suit', 40.00, 'about2.jpg')">Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="about3.jpg" alt="Featured Product 6" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Sleeveless Dress</h3>
+                <p class="product-price">$80.00</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Sleeveless Dress', 80.00, 'about3.jpg')">Add to Cart</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- CART SECTION -->
+<section id="cart" class="section">
+    <h1 class="text-animate">Your Cart</h1>
+    <p class="text-animate">Review and manage the items in your shopping cart.</p>
+
+    <ul id="cart-items" class="cart-items">
+        <!-- Cart items will be dynamically added here -->
+    </ul>
+
+    <div class="cart-total">
+        Total: $<span id="cart-total-price">0.00</span>
+    </div>
+
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section py-5">
+    <div class="container">
+        <h1 class="text-center mb-4 text-animate">Contact Us</h1>
+        <p class="text-center mb-5 text-animate">Have any questions? Reach out to us and we'll be happy to assist you!</p>
+
+        <!-- Contact Form -->
+        <form id="contactForm">
+            <div class="row">
+                <!-- Name Input -->
+                <div class="col-md-6 mb-3">
+                    <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                </div>
+
+                <!-- Email Input -->
+                <div class="col-md-6 mb-3">
+                    <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                </div>
+            </div>
+
+            <!-- Message Input -->
+            <div class="mb-3">
+                <textarea id="message" class="form-control" rows="4" placeholder="Your Message"
+                          required></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+            </div>
+        </form>
+
+        <!-- Contact Information -->
+        <div class="mt-4 text-center">
+            <p class="text-animate">Email: <a href="mailto:support@fashionhub.com">support@fashionhub.com</a></p>
+            <p class="text-animate">Phone: +1 (800) 123-4567</p>
+            <p class="text-animate">Address: 359, M.I.E PART A, BAHADURGARH, HARYANA</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    © 2024 Fashion Hub. All rights reserved.
+    <div class="social-icons">
+        <a href="https://www.facebook.com/YourFashionHubPage" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.twitter.com/YourFashionHub" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/YourFashionHubOfficial" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+        <!-- Replace with your actual social media URLs -->
+    </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="backToTop" class="btn btn-danger back-to-top">↑ Back to Top</button>
+
+<script>
+    const sections = document.querySelectorAll('.section');
+    const textElements = document.querySelectorAll('.text-animate, .fade-down');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {threshold: 0.5});
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    const textObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('text-visible', 'fade-visible');
+            }
+        });
+    }, {threshold: 0.5});
+
+    textElements.forEach(text => {
+        textObserver.observe(text);
+    });
+
+    const backToTopBtn = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.style.display = "block";
+        } else {
+            backToTopBtn.style.display = "none";
+        }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({top: 0, behavior: "smooth"});
+    });
+
+    let cart = []; // Array to store cart items
+
+    function addToCart(name, price, image) {
+        const item = {
+            name: name,
+            price: price,
+            image: image
+        };
+        cart.push(item);
+        updateCartDisplay();
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+        const cartItemsElement = document.getElementById('cart-items');
+        const cartTotalElement = document.getElementById('cart-total-price');
+
+        // Clear existing cart items
+        cartItemsElement.innerHTML = '';
+
+        let total = 0;
+
+        // Create and append cart items
+        cart.forEach((item, index) => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('cart-item');
+            listItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div class="cart-item-info">
+                    <h4 class="cart-item-name">${item.name}</h4>
+                    <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                </div>
+                <button class="remove-item-btn" onclick="removeFromCart(${index})">Remove</button>
+            `;
+            cartItemsElement.appendChild(listItem);
+            total += item.price;
+        });
+
+        // Update cart total
+        cartTotalElement.textContent = total.toFixed(2);
+    }
+
+    function checkout() {
+        if (cart.length > 0) {
+            alert('Proceeding to checkout...');
+            // You would typically redirect to a checkout page here
+        } else {
+            alert('Your cart is empty. Add items to proceed to checkout.');
+        }
+    }
+
+    // Initial cart display
+    updateCartDisplay();
+</script>
+
+</body>
+
+</html>
